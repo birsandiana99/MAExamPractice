@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout   xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@color/colorPrimary"
+        tools:context=".EntityDetailActivity">
+
+    <TextView
+            android:id="@+id/titleDetail"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:layout_marginEnd="25dp"
+            android:text="Title"
+            android:textColor="@android:color/white"/>
+    <TextView
+            android:id="@+id/descriptionDetail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="25dp"
+            android:text="Description"
+            android:textColor="@android:color/white"/>
+    <TextView
+            android:id="@+id/albumDetail"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:layout_marginEnd="25dp"
+            android:text="Album"
+            android:textColor="@android:color/white"/>
+    <TextView
+            android:id="@+id/genreDetail"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:layout_marginEnd="25dp"
+            android:text="Genre"
+            android:textColor="@android:color/white"/>
+    <TextView
+            android:id="@+id/yearDetail"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:layout_marginEnd="25dp"
+            android:text="Year"
+            android:textColor="@android:color/white"/>
+
+    <Button
+            android:text="Favourite"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" android:id="@+id/favBtn"/>
+
+
+</LinearLayout>

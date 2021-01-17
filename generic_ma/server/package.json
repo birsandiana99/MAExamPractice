@@ -1,7 +1,7 @@
 {
-  "name": "exam24a",
+  "name": "exam24b",
   "version": "1.0.0",
-  "description": "Exam 24a 2019",
+  "description": "Exam 24b 2019",
   "private": true,
   "main": "index.js",
   "scripts": {

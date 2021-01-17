@@ -23,122 +23,100 @@ const getRandomInt = (min, max) => {
     return Math.floor(Math.random() * (max - min)) + min;
 };
 
-const productNames = ['Book', 'Phone', 'Tablet', 'Laptop', 'Computer'];
-const productDescription = ['Very good!', 'Slightly used', 'Top condition', 'Somehow new!'];
-const statusTypes = ['new', 'sold', 'popular', 'old', 'discounted'];
-const products = [];
-for (let i = 0; i < 10; i++) {
-    products.push({
+const songTitles = ['Seconds For You', 'Melody Of Stars', 'Dream Of My Door', 'Diamond Promises', 'Wouldn\'t It Be Nice'];
+const songDescription = ['Very good!', 'Slightly used', 'Top condition', 'Somehow new!'];
+const songAlbums = ['One', 'Two', 'Four', 'Nine'];
+const songGenre = ['Blues', 'Country', 'Electronic', 'Hip Hop', 'Jazz', 'Latin', 'Pop', 'R&B', 'Rock', 'Ska'];
+const songs = [];
+for (let i = 0; i < 50; i++) {
+    songs.push({
         id: i + 1,
-        name: productNames[getRandomInt(0, productNames.length)],
-        description: productDescription[getRandomInt(0, productDescription.length)],
-        quantity: getRandomInt(1, 100),
-        price: getRandomInt(1, 10000),
-        status: statusTypes[getRandomInt(0, statusTypes.length)]
+        title: songTitles[getRandomInt(0, songTitles.length)],
+        description: songDescription[getRandomInt(0, songDescription.length)],
+        album: songAlbums[getRandomInt(0, songAlbums.length)],
+        genre: songGenre[getRandomInt(0, songGenre.length)],
+        year: getRandomInt(1950, 2019)
     });
 }
 
 const router = new Router();
-router.get('/products', ctx => {
-    ctx.response.body = products.filter(product => product.status !== statusTypes[1]);
+router.get('/genres', ctx => {
+    ctx.response.body = songGenre;
     ctx.response.status = 200;
 });
 
 router.get('/all', ctx => {
-    ctx.response.body = products;
+    ctx.response.body = songs;
     ctx.response.status = 200;
 });
 
-router.post('/buyProduct', ctx => {
+
+router.get('/songs/:genre', ctx => {
     // console.log("ctx: " + JSON.stringify(ctx));
-    const headers = ctx.request.body;
-    // console.log("body: " + JSON.stringify(headers));
-    const id = headers.id;
-    const quantity = headers.quantity;
-    if (typeof id !== 'undefined' && typeof quantity !== 'undefined') {
-        const index = products.findIndex(product => product.id == id && product.quantity >= quantity);
-        if (index === -1) {
-            console.log("Product not available!");
-            ctx.response.body = {text: 'Product not available!'};
-            ctx.response.status = 404;
-        } else {
-            let product = products[index];
-            product.quantity -= 1;
-            if (product.quantity === 0) {
-                product.status = statusTypes[1]
-            }
-            ctx.response.body = product;
-            ctx.response.status = 200;
-        }
-    } else {
-        console.log("Missing or invalid: id or quantity!");
-        ctx.response.body = {text: 'Missing or invalid: id or quantity!'};
-        ctx.response.status = 404;
-    }
-});
-
-const broadcast = (data) =>
-    wss.clients.forEach((client) => {
-        if (client.readyState === WebSocket.OPEN) {
-            client.send(JSON.stringify(data));
-        }
-    });
-
-router.post('/product', ctx => {
-    // console.log("ctx: " + JSON.stringify(ctx));
-    const headers = ctx.request.body;
-    // console.log("body: " + JSON.stringify(headers));
-    const name = headers.name;
-    const description = headers.description;
-    const quantity = headers.quantity;
-    const price = headers.price;
-    if (typeof name !== 'undefined' && typeof description !== 'undefined' && typeof quantity !== 'undefined'
-        && typeof price !== 'undefined') {
-        const index = products.findIndex(product => product.name == name &&
-            product.description == description);
-        if (index !== -1) {
-            console.log("Product already exists!");
-            ctx.response.body = {text: 'Product already exists!'};
-            ctx.response.status = 404;
-        } else {
-            let maxId = Math.max.apply(Math, products.map(function (product) {
-                return product.id;
-            })) + 1;
-            let product = {
-                id: maxId,
-                name,
-                description,
-                quantity,
-                price,
-                status: statusTypes[0]
-            };
-            products.push(product);
-            broadcast(product);
-            ctx.response.body = product;
-            ctx.response.status = 200;
-        }
-    } else {
-        console.log("Missing or invalid: name, description, quantity or price!");
-        ctx.response.body = {text: 'Missing or invalid: name, description, quantity or price!"'};
-        ctx.response.status = 404;
-    }
-});
-
-router.del('/product/:id', ctx => {
-    console.log("ctx: " + JSON.stringify(ctx));
     const headers = ctx.params;
-    console.log("body: " + JSON.stringify(headers));
+    const genre = headers.genre;
+    // console.log("genre: " + JSON.stringify(genre));
+    ctx.response.body = songs.filter(song => song.genre == genre);
+    // console.log("body: " + JSON.stringify(ctx.response.body));
+    ctx.response.status = 200;
+});
+
+
+router.post('/song', ctx => {
+    // console.log("ctx: " + JSON.stringify(ctx));
+    const headers = ctx.request.body;
+    // console.log("body: " + JSON.stringify(headers));
+    const title = headers.title;
+    const description = headers.description;
+    const album = headers.album;
+    const genre = headers.genre;
+    const year = headers.year;
+    if (typeof title !== 'undefined' && typeof description !== 'undefined' && typeof album !== 'undefined'
+        && typeof genre !== 'undefined' && typeof year !== 'undefined') {
+        const index = songs.findIndex(song => song.title == title &&
+            song.album == album && song.genre == genre);
+        if (index !== -1) {
+            console.log("Song already exists!");
+            ctx.response.body = {text: 'Song already exists!'};
+            ctx.response.status = 404;
+        } else {
+            let maxId = Math.max.apply(Math, songs.map(function (song) {
+                return song.id;
+            })) + 1;
+            let song = {
+                id: maxId,
+                title,
+                description,
+                album,
+                genre,
+                year
+            };
+            songs.push(song);
+            ctx.response.body = song;
+            ctx.response.status = 200;
+        }
+    } else {
+        console.log("Missing or invalid: title, description, album, genre or year!");
+        ctx.response.body = {text: 'Missing or invalid: title, description, album, genre or year!'};
+        ctx.response.status = 404;
+    }
+});
+
+router.del('/song/:id', ctx => {
+    // console.log("ctx: " + JSON.stringify(ctx));
+    const headers = ctx.params;
+    // console.log("body: " + JSON.stringify(headers));
     const id = headers.id;
     if (typeof id !== 'undefined') {
-        const index = products.findIndex(product => product.id == id);
+        const index = songs.findIndex(song => song.id == id);
         if (index === -1) {
-            console.log("No product with id: " + id);
-            ctx.response.body = {text: 'Invalid product id'};
+            console.log("No song with id: " + id);
+            ctx.response.body = {text: 'Invalid song id'};
             ctx.response.status = 404;
         } else {
-            let product = products[index];
-            products.splice(index, 1);
-            ctx.response.body = product;
+            let song = songs[index];
+            songs.splice(index, 1);
+            ctx.response.body = song;
             ctx.response.status = 200;
         }
     } else {
@@ -150,4 +128,4 @@ router.del('/product/:id', ctx => {
 app.use(router.routes());
 app.use(router.allowedMethods());
 
-server.listen(2024);
+server.listen(2224);

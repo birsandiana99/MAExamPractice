@@ -1,0 +1,49 @@
+CHANGE PORT - Api Client
+
+    @field:SerializedName("id")
+    var id: Int = 0,
+    @field:SerializedName("title") //name
+    var title: String = "",
+    @field:SerializedName("description") //field2
+    var description: String = "",
+    @field:SerializedName("album") //field3
+    var album: String = "new",
+    @field:SerializedName("genre") //field4
+    var genre: String = "",
+    @field:SerializedName("year") //field5
+    var year :Int = 0)
+	
+
+CHANGE REQUEST PATH - make requests match server
+
+
+
+
+
+
+
+activity_entity_detail.xml
+title -> fieldName 
+descriptionDetail -> field2Detail
+albumDetail -> field3Detail
+genreDetail -> field4Detail
+yearDetail -> field5Detail
+
+
+activity_item.xml
+titleText -> fieldNameText
+descriptionText -> field2Text
+albumText -> field3Text
+genreText -> field4Text
+yearText -> field5Text
+
+
+item_client_view.xml
+title -> objectName
+
+item_view_clerk.xml
+titleAlbum -> nameField3Layout
+album -> field3
+genreYear -> field4Field5Layout
+genre -> field4
+year -> field5

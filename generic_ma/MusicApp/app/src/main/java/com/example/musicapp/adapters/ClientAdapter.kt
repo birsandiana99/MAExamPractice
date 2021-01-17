@@ -51,7 +51,7 @@ class ClientAdapter(val context: Context) :
         holder.view.genre.text = elementsList[position] // field4 ( for filtering)
 
         holder.view.setOnClickListener {
-            Log.d("element", elementsList[position])
+//            Log.d("element", elementsList[position])
             val aux = Intent(context, ElementsActivity::class.java)
             aux.putExtra("genre", elementsList[position]) // field4 ( for filtering)
             aux.flags = Intent.FLAG_ACTIVITY_NEW_TASK
@@ -71,7 +71,7 @@ class ClientAdapter(val context: Context) :
                         elementsList.clear()
                         elementsList.addAll(result)
                         notifyDataSetChanged()
-                        Log.d("Elements -> ", elementsList.toString())
+//                        Log.d("Elements -> ", elementsList.toString())
                     },
                     { throwable ->
                         if (throwable is HttpException) {

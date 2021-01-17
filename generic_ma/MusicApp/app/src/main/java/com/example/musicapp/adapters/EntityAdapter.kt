@@ -3,6 +3,7 @@ package com.example.musicapp.adapters
 import android.app.AlertDialog
 import android.content.ContentValues
 import android.content.Context
+import android.content.Intent
 import android.net.ConnectivityManager
 import android.support.v7.widget.RecyclerView
 import android.util.Log
@@ -10,6 +11,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import com.example.musicapp.EditActivity
+import com.example.musicapp.EntityDetailActivity
 import com.example.musicapp.R
 import com.example.musicapp.local_db.DbManager
 import com.example.musicapp.models.Song
@@ -46,12 +49,19 @@ class EntityAdapter(val context: Context) :
     }
 
     override fun onBindViewHolder(holder: ElementViewAdapter, position: Int) {
-
         holder.view.title.text = elementsList[position].title // name
         holder.view.album.text = elementsList[position].album // field3
         holder.view.genre.text = elementsList[position].genre // field4
         holder.view.year.text = elementsList[position].year.toString() // field5
         holder.view.btnDelete.setOnClickListener { showDeleteDialog(holder, elementsList[position]) }
+
+        holder.view.setOnClickListener {
+            val aux = Intent(context, EditActivity::class.java)
+            Log.d("AAA  put id:" ,elementsList[position].id.toString())
+            aux.putExtra("id", elementsList[position].id.toString()) // name
+            aux.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+            context.startActivity(aux)
+        }
     }
 
     override fun getItemCount() = elementsList.size
@@ -67,7 +77,7 @@ class EntityAdapter(val context: Context) :
                         elementsList.addAll(result)
                         elementsList.sortWith(compareBy({ it.album }, { it.title })) // field3, name
                         notifyDataSetChanged()
-                        Log.d("Elements -> ", elementsList.toString())
+//                        Log.d("Elements -> ", elementsList.toString())
                     },
                     { throwable ->
                         if (throwable is HttpException) {
@@ -104,7 +114,7 @@ class EntityAdapter(val context: Context) :
                 .subscribe(
                     {
                         refreshElements()
-                        Log.d("Element added -> ", element.toString())
+//                        Log.d("Element added -> ", element.toString())
                     },
                     { throwable ->
                         if (throwable is HttpException) {
@@ -112,6 +122,33 @@ class EntityAdapter(val context: Context) :
                             Toast.makeText(
                                 context,
                                 "Error: ${JSONObject(body.string()).getString("text")}",
+                                Toast.LENGTH_LONG
+                            ).show()
+                        }
+                    }
+                )
+        } else {
+            Toast.makeText(context, "Not online!", Toast.LENGTH_LONG).show()
+        }
+    }
+
+    fun editElement(element: Song) {
+        Log.d("AAAA",element.id.toString())
+        if (checkOnline()) {
+            client.updateElement(element.id!!, element)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                    {
+                        refreshElements()
+                        Log.d("Element edited -> ", element.toString())
+                    },
+                    { throwable ->
+                        if (throwable is HttpException) {
+                            val body: ResponseBody = throwable.response().errorBody()!!
+                            Toast.makeText(
+                                context,
+                                "Error: ${body.string()}",
                                 Toast.LENGTH_LONG
                             ).show()
                         }
@@ -130,7 +167,7 @@ class EntityAdapter(val context: Context) :
                 .subscribe(
                     {
                         refreshElements()
-                        Log.d("Element deleted -> ", element.toString())
+//                        Log.d("Element deleted -> ", element.toString())
                     },
                     { throwable ->
                         Toast.makeText(context, "Delete error: ${throwable.message}", Toast.LENGTH_LONG).show()

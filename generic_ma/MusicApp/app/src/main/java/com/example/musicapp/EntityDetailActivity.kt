@@ -29,7 +29,6 @@ class EntityDetailActivity : AppCompatActivity() {
             values.put("album", intent.getStringExtra("album")) // field3
             values.put("genre", intent.getStringExtra("genre")) // field4
             values.put("year", intent.getStringExtra("year").toInt()) // field5
-
             dbManager.insert(values) // insert values into db - offline only (favourites)
 
         }

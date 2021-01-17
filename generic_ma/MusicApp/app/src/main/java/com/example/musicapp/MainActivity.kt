@@ -20,6 +20,18 @@ class MainActivity : AppCompatActivity() {
         clientButton.setOnClickListener {
             openClient()
         }
+
+        reportButton.setOnClickListener {
+            openReport()
+        }
+    }
+
+    fun openReport() {
+        if (checkOnline()) {
+            startActivity(Intent(this, ReportActivity::class.java))
+        } else {
+            Toast.makeText(this, "You don't have internet", Toast.LENGTH_LONG).show()
+        }
     }
 
     fun openClerk() {

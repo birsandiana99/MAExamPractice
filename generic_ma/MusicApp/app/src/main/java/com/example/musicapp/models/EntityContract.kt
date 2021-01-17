@@ -8,7 +8,7 @@ object EntityContract {
 
     // Table contents are grouped together in an anonymous object.
     object TaskEntry : BaseColumns {
-        const val DB_TABLE = "product_table"
+        const val DB_TABLE = "my_table"
         const val COLUMN_ID = "id"
         const val COLUMN_TITLE = "title" //fieldName
         const val COLUMN_DESCRIPTION = "description" //field2

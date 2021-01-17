@@ -35,11 +35,11 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun openClerk() {
-        if (checkOnline()) {
+//        if (checkOnline()) {
             startActivity(Intent(this, ClerkActivity::class.java))
-        } else {
-            Toast.makeText(this, "You don't have internet", Toast.LENGTH_LONG).show()
-        }
+//        } else {
+//            Toast.makeText(this, "You don't have internet", Toast.LENGTH_LONG).show()
+//        }
     }
 
     fun openClient() {

@@ -29,8 +29,11 @@ class EntityAdapter(val context: Context) :
 
     val client by lazy { ApiClient.create() }
     var elementsList: ArrayList<Song> = ArrayList()
+    private lateinit var dbManager: DbManager
+
 
     init {
+        dbManager = DbManager(context)
         refreshElements()
     }
 
@@ -91,6 +94,20 @@ class EntityAdapter(val context: Context) :
                     }
                 )
         } else {
+            val cursor = dbManager.queryAll()
+            elementsList.clear()
+            if (cursor.moveToFirst()) {
+                do {
+                    val id = cursor.getInt(cursor.getColumnIndex("id"))
+                    val title = cursor.getString(cursor.getColumnIndex("title")) // name
+                    val description = cursor.getString(cursor.getColumnIndex("description")) // field2
+                    val album = cursor.getString(cursor.getColumnIndex("album")) // field3
+                    val genre = cursor.getString(cursor.getColumnIndex("genre")) // field4
+                    val year = cursor.getString(cursor.getColumnIndex("year")) // field5
+                    // id, name, field2, field3, field4, field5
+                    elementsList.add(Song(id = id, title = title, description = description, album = album, genre = genre, year = year.toInt()))
+                } while (cursor.moveToNext())
+            }
             Toast.makeText(context, "Not online!", Toast.LENGTH_LONG).show()
         }
 
@@ -128,6 +145,13 @@ class EntityAdapter(val context: Context) :
                     }
                 )
         } else {
+            val values = ContentValues()
+            values.put("title", element.title) // name
+            values.put("description", element.description) // field2
+            values.put("album", element.album) // field3
+            values.put("genre", element.genre) // field4
+            values.put("year", element.year) // field5
+            dbManager.insert(values) // insert values into db - offline only (favourites) // insert values into db - offline only (favourites)
             Toast.makeText(context, "Not online!", Toast.LENGTH_LONG).show()
         }
     }

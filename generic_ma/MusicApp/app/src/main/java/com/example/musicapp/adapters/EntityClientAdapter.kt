@@ -44,17 +44,18 @@ class EntityClientAdapter(val context: Context, val genre: String) :
     }
 
     override fun onBindViewHolder(holder: ElementViewAdapter, position: Int) {
-        holder.view.title.text = elementsList[position].title
+        // prepare details and special operation activity
+        holder.view.title.text = elementsList[position].title // name
 
         holder.view.setOnClickListener {
             Log.d("item", elementsList[position].toString())
 
             val aux = Intent(context, EntityDetailActivity::class.java)
-            aux.putExtra("description", elementsList[position].description)
-            aux.putExtra("album", elementsList[position].album)
-            aux.putExtra("genre", elementsList[position].genre)
-            aux.putExtra("year", elementsList[position].year.toString())
-            aux.putExtra("title", elementsList[position].title)
+            aux.putExtra("description", elementsList[position].description) // field2
+            aux.putExtra("album", elementsList[position].album) // field3
+            aux.putExtra("genre", elementsList[position].genre) // field4
+            aux.putExtra("year", elementsList[position].year.toString()) // field5
+            aux.putExtra("title", elementsList[position].title) // name
             aux.flags = Intent.FLAG_ACTIVITY_NEW_TASK
             context.startActivity(aux)
         }
@@ -64,7 +65,7 @@ class EntityClientAdapter(val context: Context, val genre: String) :
 
     private fun refreshElements() {
         if (checkOnline()) {
-            client.getSongs(genre)
+            client.getSongs(genre) // /songs/:genre
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(

@@ -7,7 +7,7 @@
         android:orientation="vertical"
         android:background="@color/colorPrimary"
         tools:context=".EntityDetailActivity">
-
+    <!--Name detail-->
     <TextView
             android:id="@+id/titleDetail"
             android:layout_width="match_parent"
@@ -15,6 +15,7 @@
             android:layout_marginEnd="25dp"
             android:text="Title"
             android:textColor="@android:color/white"/>
+    <!--Field2 detail-->
     <TextView
             android:id="@+id/descriptionDetail"
             android:layout_width="match_parent"
@@ -22,6 +23,7 @@
             android:layout_marginEnd="25dp"
             android:text="Description"
             android:textColor="@android:color/white"/>
+    <!--Field3 detail-->
     <TextView
             android:id="@+id/albumDetail"
             android:layout_width="match_parent"
@@ -29,6 +31,7 @@
             android:layout_marginEnd="25dp"
             android:text="Album"
             android:textColor="@android:color/white"/>
+    <!--Field4 detail-->
     <TextView
             android:id="@+id/genreDetail"
             android:layout_width="match_parent"
@@ -36,6 +39,7 @@
             android:layout_marginEnd="25dp"
             android:text="Genre"
             android:textColor="@android:color/white"/>
+    <!--Field5 detail-->
     <TextView
             android:id="@+id/yearDetail"
             android:layout_width="match_parent"

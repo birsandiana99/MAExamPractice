@@ -16,21 +16,21 @@ class EntityDetailActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_entity_detail)
 
-        titleDetail.text = intent.getStringExtra("title")
-        descriptionDetail.text = intent.getStringExtra("description")
-        genreDetail.text = intent.getStringExtra("genre")
-        albumDetail.text = intent.getStringExtra("album")
-        yearDetail.text = intent.getStringExtra("year")
+        titleDetail.text = intent.getStringExtra("title") // name
+        descriptionDetail.text = intent.getStringExtra("description") // field2
+        albumDetail.text = intent.getStringExtra("album") // field3
+        genreDetail.text = intent.getStringExtra("genre") // field4
+        yearDetail.text = intent.getStringExtra("year") // field5
 
         favBtn.setOnClickListener {
             val values = ContentValues()
-            values.put("title", intent.getStringExtra("title"))
-            values.put("description", intent.getStringExtra("description"))
-            values.put("album", intent.getStringExtra("album"))
-            values.put("genre", intent.getStringExtra("genre"))
-            values.put("year", intent.getStringExtra("year").toInt())
+            values.put("title", intent.getStringExtra("title")) // name
+            values.put("description", intent.getStringExtra("description")) // field2
+            values.put("album", intent.getStringExtra("album")) // field3
+            values.put("genre", intent.getStringExtra("genre")) // field4
+            values.put("year", intent.getStringExtra("year").toInt()) // field5
 
-            dbManager.insert(values)
+            dbManager.insert(values) // insert values into db - offline only (favourites)
 
         }
     }

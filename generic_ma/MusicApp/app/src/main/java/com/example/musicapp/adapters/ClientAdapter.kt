@@ -48,12 +48,12 @@ class ClientAdapter(val context: Context) :
     }
 
     override fun onBindViewHolder(holder: ElementViewAdapter, position: Int) {
-        holder.view.genre.text = elementsList[position]
+        holder.view.genre.text = elementsList[position] // field4 ( for filtering)
 
         holder.view.setOnClickListener {
             Log.d("element", elementsList[position])
             val aux = Intent(context, ElementsActivity::class.java)
-            aux.putExtra("genre", elementsList[position])
+            aux.putExtra("genre", elementsList[position]) // field4 ( for filtering)
             aux.flags = Intent.FLAG_ACTIVITY_NEW_TASK
             context.startActivity(aux)
         }

@@ -4,7 +4,12 @@ import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import com.example.musicapp.models.EntityContract
-
+//CHANGE DB COLUMNS
+//title -> fieldName
+//description -> field2
+//album -> field3
+//genre -> field4
+//year -> field5
 private const val SQL_CREATE_ENTRIES =
     """CREATE TABLE IF NOT EXISTS ${EntityContract.TaskEntry.DB_TABLE} (
             ${EntityContract.TaskEntry.COLUMN_ID} INTEGER PRIMARY KEY,

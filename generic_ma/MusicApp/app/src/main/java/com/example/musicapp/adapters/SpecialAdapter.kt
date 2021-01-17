@@ -29,11 +29,12 @@ class SpecialAdapter(val context: Context) :
         if (cursor.moveToFirst()) {
             do {
                 val id = cursor.getInt(cursor.getColumnIndex("id"))
-                val title = cursor.getString(cursor.getColumnIndex("title"))
-                val description = cursor.getString(cursor.getColumnIndex("description"))
-                val album = cursor.getString(cursor.getColumnIndex("album"))
-                val genre = cursor.getString(cursor.getColumnIndex("genre"))
-                val year = cursor.getString(cursor.getColumnIndex("year"))
+                val title = cursor.getString(cursor.getColumnIndex("title")) // name
+                val description = cursor.getString(cursor.getColumnIndex("description")) // field2
+                val album = cursor.getString(cursor.getColumnIndex("album")) // field3
+                val genre = cursor.getString(cursor.getColumnIndex("genre")) // field4
+                val year = cursor.getString(cursor.getColumnIndex("year")) // field5
+                // id, name, field2, field3, field4, field5
                 elementsList.add(Song(id = id, title = title, description = description, album = album, genre = genre, year = year.toInt()))
             } while (cursor.moveToNext())
         }
@@ -56,10 +57,10 @@ class SpecialAdapter(val context: Context) :
 
     override fun onBindViewHolder(holder: SpecialViewAdapter, position: Int) {
 
-        holder.view.title.text = elementsList[position].title
-        holder.view.album.text = elementsList[position].album
-        holder.view.genre.text = elementsList[position].genre
-        holder.view.year.text = elementsList[position].year.toString()
+        holder.view.title.text = elementsList[position].title // name
+        holder.view.album.text = elementsList[position].album // field3
+        holder.view.genre.text = elementsList[position].genre // field4
+        holder.view.year.text = elementsList[position].year.toString() // field5
     }
 
     override fun getItemCount() = elementsList.size

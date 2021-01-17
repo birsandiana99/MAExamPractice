@@ -18,7 +18,7 @@ class ElementsActivity : AppCompatActivity() {
         progressBar.visibility = View.VISIBLE
         val handler = Handler()
         handler.postDelayed( {
-            adapter = EntityClientAdapter(this@ElementsActivity, intent.getStringExtra("genre"))
+            adapter = EntityClientAdapter(this@ElementsActivity, intent.getStringExtra("genre")) //make adapter for filtering with genre (field4)
             val layoutManager = LinearLayoutManager(this)
             layoutManager.orientation = LinearLayoutManager.VERTICAL
 

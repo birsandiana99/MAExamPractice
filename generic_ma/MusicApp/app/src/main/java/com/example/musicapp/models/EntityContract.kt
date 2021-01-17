@@ -10,11 +10,11 @@ object EntityContract {
     object TaskEntry : BaseColumns {
         const val DB_TABLE = "product_table"
         const val COLUMN_ID = "id"
-        const val COLUMN_TITLE = "title"
-        const val COLUMN_ALBUM = "album"
-        const val COLUMN_GENRE = "genre"
-        const val COLUMN_DESCRIPTION = "description"
-        const val COLUMN_YEAR = "year"
+        const val COLUMN_TITLE = "title" //fieldName
+        const val COLUMN_DESCRIPTION = "description" //field2
+        const val COLUMN_ALBUM = "album" //field3
+        const val COLUMN_GENRE = "genre" //field4
+        const val COLUMN_YEAR = "year" //field5
 
     }
 }

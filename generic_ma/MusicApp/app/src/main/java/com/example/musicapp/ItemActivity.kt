@@ -33,11 +33,11 @@ class ItemActivity : AppCompatActivity() {
 
             if (id == 0) {
                 val item = Song(1,"","")
-                item.title = titleText.text.toString()
-                item.description = descriptionText.text.toString()
-                item.album =  albumText.text.toString()
-                item.genre = genreText.text.toString()
-                item.year = yearText.text.toString().toInt()
+                item.title = titleText.text.toString() // name
+                item.description = descriptionText.text.toString() // field2
+                item.album =  albumText.text.toString() // field3
+                item.genre = genreText.text.toString() // field4
+                item.year = yearText.text.toString().toInt() // field5
                 progressBar.visibility = View.VISIBLE
 
 

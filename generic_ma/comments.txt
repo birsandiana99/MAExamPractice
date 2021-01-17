@@ -1,20 +1,62 @@
 CHANGE PORT - Api Client
 
-    @field:SerializedName("id")
-    var id: Int = 0,
-    @field:SerializedName("title") //name
-    var title: String = "",
-    @field:SerializedName("description") //field2
-    var description: String = "",
-    @field:SerializedName("album") //field3
-    var album: String = "new",
-    @field:SerializedName("genre") //field4
-    var genre: String = "",
-    @field:SerializedName("year") //field5
-    var year :Int = 0)
+
+
+title -> fieldName
+description -> field2
+album -> field3
+genre -> field4
+year -> field5
 	
 
 CHANGE REQUEST PATH - make requests match server
+
+
+CHANGE DB COLUMNS - change columns from DatabaseHelper
+
+
+make adapter for filtering with genre (field4) 
+
+
+prepare details and special operation activity
+
+
+/songs/:genre 
+	- filter
+
+// insert values into db - offline only (favourites)	
+	- add operation
+	
+// delete
+
+// confirm delete
+
+
+// field4 ( for filtering)
+
+-----------------------XMLs:
+-activity_entity_detail-
+Name detail
+Field2 detail
+Field3 detail
+Field4 detail
+Field5 detail
+
+
+-activity_item-
+Name Text
+Field2 Text
+Field3 Text
+Field4 Text
+Field5 Text
+
+-item_client_view-
+List of names
+
+
+-item_view_clerk-
+All objects and details
+Layout name-field3
 
 
 
@@ -39,8 +81,7 @@ yearText -> field5Text
 
 
 item_client_view.xml
-title -> objectName
-
+title -> fieldName
 item_view_clerk.xml
 titleAlbum -> nameField3Layout
 album -> field3

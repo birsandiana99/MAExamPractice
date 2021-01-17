@@ -17,13 +17,16 @@
         card_view:cardCornerRadius="5dp"
         card_view:contentPadding="5dp"
 >
+        <!--Layout for special operation-->
         <LinearLayout android:layout_width="match_parent"
                       android:layout_height="match_parent"
                       android:orientation="vertical">
+            <!--Layout for name-field3-->
             <LinearLayout
                     android:id="@+id/titleAlbum"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
+                <!--name-->
                 <TextView
                         android:id="@+id/title"
                         android:layout_width="wrap_content"
@@ -31,6 +34,7 @@
                         android:layout_marginEnd="25dp"
                         android:text="Title"
                         android:textColor="@android:color/white"/>
+                <!--field3-->
                 <TextView
                         android:id="@+id/album"
                         android:layout_width="wrap_content"
@@ -40,11 +44,12 @@
                         android:textColor="@android:color/white"/>
             </LinearLayout>
 
-
+            <!--Layout for field4-field5-->
             <LinearLayout
                     android:id="@+id/genreYear"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
+                <!--field4-->
                 <TextView
                         android:id="@+id/genre"
                         android:layout_width="wrap_content"
@@ -52,6 +57,7 @@
                         android:layout_marginEnd="25dp"
                         android:text="Genre"
                         android:textColor="@android:color/white"/>
+                <!--field5-->
                 <TextView
                         android:id="@+id/year"
                         android:layout_width="wrap_content"

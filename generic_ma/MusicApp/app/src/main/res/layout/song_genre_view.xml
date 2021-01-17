@@ -17,7 +17,7 @@
         card_view:cardCornerRadius="5dp"
         card_view:contentPadding="5dp"
 >
-
+    <!--field4-->
     <TextView
             android:id="@+id/genre"
             android:layout_width="wrap_content"

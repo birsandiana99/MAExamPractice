@@ -9,7 +9,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.*
 
 interface ApiClient {
-
+    //CHANGE REQUEST PATH
     @GET("all") fun getElements(): Observable<List<Song>> // Observable<SongEmbedded>
     @GET("genres") fun getGenres(): Observable<List<String>>
     @GET("songs/{genre}") fun getSongs(@Path("genre") genre: String): Observable<List<Song>>
@@ -20,7 +20,7 @@ interface ApiClient {
     companion object {
 
         fun create(): ApiClient {
-
+            //CHANGE PORT
             val retrofit = Retrofit.Builder()
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create())

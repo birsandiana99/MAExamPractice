@@ -17,6 +17,7 @@
         card_view:cardCornerRadius="5dp"
         card_view:contentPadding="5dp"
 >
+    <!--List of names-->
     <TextView
             android:id="@+id/title"
             android:layout_width="wrap_content"

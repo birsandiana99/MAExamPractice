@@ -47,10 +47,10 @@ class EntityAdapter(val context: Context) :
 
     override fun onBindViewHolder(holder: ElementViewAdapter, position: Int) {
 
-        holder.view.title.text = elementsList[position].title
-        holder.view.album.text = elementsList[position].album
-        holder.view.genre.text = elementsList[position].genre
-        holder.view.year.text = elementsList[position].year.toString()
+        holder.view.title.text = elementsList[position].title // name
+        holder.view.album.text = elementsList[position].album // field3
+        holder.view.genre.text = elementsList[position].genre // field4
+        holder.view.year.text = elementsList[position].year.toString() // field5
         holder.view.btnDelete.setOnClickListener { showDeleteDialog(holder, elementsList[position]) }
     }
 
@@ -65,7 +65,7 @@ class EntityAdapter(val context: Context) :
                     { result ->
                         elementsList.clear()
                         elementsList.addAll(result)
-                        elementsList.sortWith(compareBy({ it.album }, { it.title }))
+                        elementsList.sortWith(compareBy({ it.album }, { it.title })) // field3, name
                         notifyDataSetChanged()
                         Log.d("Elements -> ", elementsList.toString())
                     },
@@ -122,7 +122,7 @@ class EntityAdapter(val context: Context) :
         }
     }
 
-    private fun deleteElement(element: Song) {
+    private fun deleteElement(element: Song) { // delete
         if (checkOnline()) {
             client.deleteElement(element.id!!)
                 .subscribeOn(Schedulers.io())
@@ -142,7 +142,7 @@ class EntityAdapter(val context: Context) :
 
     }
 
-    private fun showDeleteDialog(holder: ElementViewAdapter, element: Song) {
+    private fun showDeleteDialog(holder: ElementViewAdapter, element: Song) { // confirm delete
         val dialogBuilder = AlertDialog.Builder(holder.view.context)
         dialogBuilder.setTitle("Delete")
         dialogBuilder.setMessage("Confirm delete?")
